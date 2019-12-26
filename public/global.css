@@ -6,7 +6,8 @@ html, body {
 
 body {
 	background-image: url("./cartographer.png");
-	color: #333;
+	background-color: #434190;
+	color: #ebf4ff;
 	margin: 0;
 	padding: 8px;
 	box-sizing: border-box;
