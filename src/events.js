@@ -20,13 +20,13 @@ export default [
   {
     name: "The Dawning",
     type: "event",
-    start: new Date('December 17, 2019 03:24:00'),
-    end: new Date('January 14, 2020 03:24:00')
+    start: new Date('December 17, 2019 17:00:00'),
+    end: new Date('January 14, 2020 17:00:00')
   },
   {
     name: "Crimson Days",
     type: "event",
-    start: new Date('February 11, 2020 03:24:00'),
-    end: new Date('February 18, 2020 03:24:00')
+    start: new Date('February 11, 2020 17:00:00'),
+    end: new Date('February 18, 2020 17:00:00')
   },
 ];

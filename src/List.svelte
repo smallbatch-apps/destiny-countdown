@@ -36,7 +36,7 @@ $: daily = nextDailyReset();
 
 const nextDailyReset = () => {
   let dailyReset = new Date();
-  dailyReset.setUTCHours(18);
+  dailyReset.setUTCHours(17);
   dailyReset.setUTCMinutes(0);
   dailyReset.setUTCSeconds(0);
 
@@ -132,3 +132,4 @@ setInterval(() => {
 
 
 </div>
+<div class="px-1 py-0 hidden"><div class="px-5 py-3"></div></div>
