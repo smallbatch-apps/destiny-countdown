@@ -6,9 +6,9 @@ $: showAbout = true;
 
 </script>
 
-<div class="text-left text-sm bg-{config.background}-800 p-5 rounded mb-5 flex hidden">
+<div class="text-left text-sm bg-gray-800 p-5 rounded mb-5 flex hidden">
   <div class="flex-1 p-5">
-    <h3 class="text-lg text-{config.colour}-600 mb-2">What's this for?</h3>
+    <h3 class="text-lg text-orange-600 mb-2">What's this for?</h3>
 
     <p class="pb-3">The question "when is the reset" shouldn't be a hard one to answer but it is for people in oddish timezones.</p>
     
@@ -20,13 +20,13 @@ $: showAbout = true;
 
   <div class="flex-1 p-5">
 
-    <h3 class="text-lg text-{config.colour}-600 mb-2">Why do you need to know the reset times?</h3>
+    <h3 class="text-lg text-orange-600 mb-2">Why do you need to know the reset times?</h3>
 
     <p class="pb-3">I am often not sure if I have time to get in a few bounties before the reset, if I can finish this quest, etc.</p>
 
     <p class="pb-3">It's also useful to know how long is left in the season.</p>
 
-    <h3 class="text-lg text-{config.colour}-600 mb-2">How accurate is it?</h3>
+    <h3 class="text-lg text-orange-600 mb-2">How accurate is it?</h3>
 
     <p class="pb-3">It's actually based on your computer clock, so there's that. I wouldn't trust it within a few minutes.</p>
 

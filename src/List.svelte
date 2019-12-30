@@ -2,7 +2,7 @@
 import { format, isPast, isFuture, differenceInHours, differenceInMinutes, differenceInDays, differenceInWeeks, isWithinInterval } from 'date-fns';
 
 import { calculateRemaining, populateRemaining } from './dateUtils';
-import config from './config.js';
+
 import allEventsRaw from './events';
 
 import DateDisplay from './DateDisplay.svelte';
@@ -89,21 +89,21 @@ setInterval(() => {
 <div class="md:flex">
   
   <div class="md:flex-1 m-5">
-    <h3 class="text-xl text-left text-{config.colour}-600 bg-{config.background}-900 p-1 pl-2">Daily Reset</h3>
+    <h3 class="text-xl text-left text-orange-600 bg-gray-900 p-1 pl-2">Daily Reset</h3>
     <div class="p-1">
       <DateDisplay {...daily} />
     </div>
   </div>
 
   <div class="md:flex-1 order-last m-5">
-    <h3 class="text-xl text-left text-{config.colour}-600 bg-{config.background}-900 p-1 pl-2">Weekly Reset</h3>
+    <h3 class="text-xl text-left text-orange-600 bg-gray-900 p-1 pl-2">Weekly Reset</h3>
     <div class="p-1">
       <DateDisplay {...weekly} />
     </div>
   </div>
 
-  <div class="md:flex-1 m-5 border border-{config.background}-900  bg-{config.background}-700">
-    <h3 class="text-xl text-left text-{config.colour}-600 bg-{config.background}-900 p-1 pl-2">{currentSeason.name}</h3>
+  <div class="md:flex-1 m-5 border border-gray-900  bg-gray-700">
+    <h3 class="text-xl text-left text-orange-600 bg-gray-900 p-1 pl-2">{currentSeason.name}</h3>
     <div class="p-1">
       <DateDisplay {...currentSeason} />
     </div>
@@ -112,20 +112,20 @@ setInterval(() => {
 </div>
 
 <div class="p-5 text-left">
-  <h3 class="text-xl text-{config.colour}-600">Event Listing</h3>
+  <h3 class="text-xl text-orange-600">Event Listing</h3>
 
   <p>This is not a complete list of every minor or once-off event within the season. For example it does not include new content or weapon releases.</p>
 </div>
 
 <div class="md:flex text-left">
-  <div class="md:flex-1 m-5 border border-{config.background}-900 bg-{config.background}-700">
-    <h3 class="text-xl text-left text-{config.colour}-600 bg-{config.background}-900 p-1 pl-2">Current Events</h3>
+  <div class="md:flex-1 m-5 border border-gray-900 bg-gray-700">
+    <h3 class="text-xl text-left text-orange-600 bg-gray-900 p-1 pl-2">Current Events</h3>
     
     <ListTable events={currentEvents} startOrEnd="end" />
   </div>
 
-  <div class="md:flex-1 m-5 border border-{config.background}-900 bg-{config.background}-700">
-    <h3 class="text-xl text-left text-{config.colour}-600 text-{config.color}-600 bg-{config.background}-900 p-1 pl-2">Future Events</h3>
+  <div class="md:flex-1 m-5 border border-gray-900 bg-gray-700">
+    <h3 class="text-xl text-left text-orange-600 text-orange-600 bg-gray-900 p-1 pl-2">Future Events</h3>
 
     <ListTable events={futureEvents} startOrEnd="start" />
   </div>

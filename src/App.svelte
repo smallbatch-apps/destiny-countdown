@@ -2,7 +2,7 @@
 	import Tailwindcss from './Tailwindcss.svelte';
 	import About from './About.svelte';
 	import List from './List.svelte';
-	import config from './config.js';
+	
 	
 	$: showAbout = false;
 	$: showFAQ = false;
@@ -11,7 +11,7 @@
 <Tailwindcss />
 
 <main class="container mx-auto text-center">
-	<h1 class="text-{config.colour}-600 text-3xl">Destiny Countdown</h1>
+	<h1 class="text-orange-600 text-3xl">Destiny Countdown</h1>
 
 	<About />
 
