@@ -21,14 +21,14 @@
 <div class="flex justify-center">
 
   {#if displayWeeks}
-    <div class="px-{px} py-{py}">{weeksRemaining} {weeksLabel}</div>
+    <div class="px-{px} py-{py}">{weeksRemaining} <span class="text-xs">{weeksLabel}</span></div>
   {/if}
   {#if displayDays}
-    <div class="px-{px} py-{py}">{daysRemaining} {daysLabel}</div>
+    <div class="px-{px} py-{py}">{daysRemaining} <span class="text-xs">{daysLabel}</span></div>
   {/if}
   {#if displayHours}
-    <div class="px-{px} py-{py}">{hoursRemaining} {hoursLabel}</div>
+    <div class="px-{px} py-{py}">{hoursRemaining} <span class="text-xs">{hoursLabel}</span></div>
   {/if}
 
-  <div class="px-{px} py-{py}">{minutesRemaining} {minutesLabel}</div>
+  <div class="px-{px} py-{py}">{minutesRemaining} <span class="text-xs">{minutesLabel}</span></div>
 </div>

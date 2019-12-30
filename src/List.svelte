@@ -1,17 +1,16 @@
 <script>
 import { format, isPast, isFuture, differenceInHours, differenceInMinutes, differenceInDays, differenceInWeeks, isWithinInterval } from 'date-fns';
 
-import { calculateRemaining } from './dateUtils';
+import { calculateRemaining, populateRemaining } from './dateUtils';
+import config from './config.js';
 import allEventsRaw from './events';
 
 import DateDisplay from './DateDisplay.svelte';
 import ListTable from './ListTable.svelte';
 
-$: allEvents = allEventsRaw.map(event => {
-  if (event.start)  event.startObject = calculateRemaining(event.start);
-  if (event.end) event.endObject = calculateRemaining(event.end);
-  return event;
-});
+$: currentMinute = (new Date()).getUTCMinutes();
+
+$: allEvents = allEventsRaw.map(populateRemaining);
 
 $: currentEvents = allEvents.filter(({start, end}) => {
   return isWithinInterval(new Date(), { start, end });
@@ -29,16 +28,13 @@ const getCurrentSeason = () => {
     return type === 'season' && isWithinInterval(currentTime, { start, end });
   });
 
-  return {...season, ...calculateRemaining(season.end)}
+  return {...season, ...calculateRemaining(season.end, 'season')}
 };
 
 
 $: daily = nextDailyReset();
 
 const nextDailyReset = () => {
-
-  const currentTime = new Date();
-  
   let dailyReset = new Date();
   dailyReset.setUTCHours(18);
   dailyReset.setUTCMinutes(0);
@@ -47,8 +43,8 @@ const nextDailyReset = () => {
   if(isPast(dailyReset)) {
     dailyReset.setUTCDate(dailyReset.getUTCDate() + 1);
   }
-
-  return calculateRemaining(dailyReset);
+  
+  return calculateRemaining(dailyReset, 'daily');
 }
 
 $: weekly = nextWeeklyReset();
@@ -77,33 +73,37 @@ const nextWeeklyReset = () => {
 }
 
 setInterval(() => {
+  const newCurrentMinute = (new Date()).getUTCMinutes();
+  //console.log((new Date()).getUTCSeconds());
+  if(newCurrentMinute === currentMinute) return;
+  
+  currentMinute = newCurrentMinute;
+  
   daily = nextDailyReset();
   weekly = nextWeeklyReset();
-}, 30000);
+  currentSeason = getCurrentSeason();
+  allEvents = allEventsRaw.map(populateRemaining);
+}, 1000);
 </script>
-
-
-<p><strong>Note:</strong> Tuesday's daily reset will be replaced by the weekly reset time</p>
-
 
 <div class="md:flex">
   
   <div class="md:flex-1 m-5">
-    <h3 class="text-xl text-left bg-indigo-900 p-1 pl-2">Daily Reset</h3>
+    <h3 class="text-xl text-left text-{config.colour}-600 bg-{config.background}-900 p-1 pl-2">Daily Reset</h3>
     <div class="p-1">
       <DateDisplay {...daily} />
     </div>
   </div>
 
   <div class="md:flex-1 order-last m-5">
-    <h3 class="text-xl text-left bg-indigo-900 p-1 pl-2">Weekly Reset</h3>
+    <h3 class="text-xl text-left text-{config.colour}-600 bg-{config.background}-900 p-1 pl-2">Weekly Reset</h3>
     <div class="p-1">
       <DateDisplay {...weekly} />
     </div>
   </div>
 
-  <div class="md:flex-1 m-5 border border-indigo-900 bg-indigo-700">
-    <h3 class="text-xl text-left bg-indigo-900 p-1 pl-2">{currentSeason.name}</h3>
+  <div class="md:flex-1 m-5 border border-{config.background}-900  bg-{config.background}-700">
+    <h3 class="text-xl text-left text-{config.colour}-600 bg-{config.background}-900 p-1 pl-2">{currentSeason.name}</h3>
     <div class="p-1">
       <DateDisplay {...currentSeason} />
     </div>
@@ -112,20 +112,20 @@ setInterval(() => {
 </div>
 
 <div class="p-5 text-left">
-  <h3 class="text-xl">Event Listing</h3>
+  <h3 class="text-xl text-{config.colour}-600">Event Listing</h3>
 
   <p>This is not a complete list of every minor or once-off event within the season. For example it does not include new content or weapon releases.</p>
 </div>
 
 <div class="md:flex text-left">
-  <div class="md:flex-1 m-5 border border-indigo-900 bg-indigo-700">
-    <h3 class="text-xl text-left bg-indigo-900 p-1 pl-2">Current Events</h3>
+  <div class="md:flex-1 m-5 border border-{config.background}-900 bg-{config.background}-700">
+    <h3 class="text-xl text-left text-{config.colour}-600 bg-{config.background}-900 p-1 pl-2">Current Events</h3>
     
     <ListTable events={currentEvents} startOrEnd="end" />
   </div>
 
-  <div class="md:flex-1 m-5 border border-indigo-900 bg-indigo-700">
-    <h3 class="text-xl text-left bg-indigo-900 p-1 pl-2">Future Events</h3>
+  <div class="md:flex-1 m-5 border border-{config.background}-900 bg-{config.background}-700">
+    <h3 class="text-xl text-left text-{config.colour}-600 text-{config.color}-600 bg-{config.background}-900 p-1 pl-2">Future Events</h3>
 
     <ListTable events={futureEvents} startOrEnd="start" />
   </div>
