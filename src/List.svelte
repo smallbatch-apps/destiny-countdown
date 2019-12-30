@@ -1,5 +1,5 @@
 <script>
-import { format, isPast, isFuture, differenceInHours, differenceInMinutes, differenceInDays, differenceInWeeks, isWithinInterval } from 'date-fns';
+import { format, isPast, isFuture, differenceInHours, differenceInMinutes, differenceInDays, differenceInWeeks, isWithinInterval, compareAsc } from 'date-fns';
 
 import { calculateRemaining, populateRemaining } from './dateUtils';
 
@@ -14,10 +14,14 @@ $: allEvents = allEventsRaw.map(populateRemaining);
 
 $: currentEvents = allEvents.filter(({start, end}) => {
   return isWithinInterval(new Date(), { start, end });
+}).sort((a, b) => {
+  return compareAsc(a.end, b.end)
 });
 
 $: futureEvents = allEvents.filter(({start}) => {
   return isFuture(start);
+}).sort((a, b) => {
+  return compareAsc(a.start, b.start)
 });
 
 $: currentSeason = getCurrentSeason();
